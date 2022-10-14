@@ -1,19 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import { RecoilRoot } from "recoil";
+import { ThemeProvider } from "styled-components";
+import App from "./App";
+import Reset from "./styles/Reset";
+import { darkTheme } from "./styles/theme";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RecoilRoot>
+      <ThemeProvider theme={darkTheme}>
+        <HelmetProvider>
+          <Helmet>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link
+              rel="preconnect"
+              href="https://fonts.gstatic.com"
+              crossOrigin=""
+            />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap"
+              rel="stylesheet"
+            />
+          </Helmet>
+          <Reset />
+          <App />
+        </HelmetProvider>
+      </ThemeProvider>
+    </RecoilRoot>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
